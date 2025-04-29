@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "dataKey",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "dataValue",
+						"type": "bytes"
+					}
+				],
+				"name": "setData",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/QuestManager.sol": "IERC725Y"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/QuestManager.sol": {
+			"keccak256": "0xa4bc35f25ba27849c44a63f36f802e0a7fdc1c66f4ff1ec5f967d40396595e61",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1c3c702dfad9511aadb37d6d17033fef7a858739ac3d9b7fad2eea9ef80473b9",
+				"dweb:/ipfs/QmdSCoEEQds7iWnCvcZzvMAoPQbLtiSAsXZLzCNkZhdWZp"
+			]
+		},
+		"hardhat/console.sol": {
+			"keccak256": "0xf2560b5386574153057104d19a9e68a32ee912cf23c0c8df1fe9a0607f42d543",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a63166e036b040826baa513772451a79925daa304b38749100efb089ac07cdc2",
+				"dweb:/ipfs/QmUtMTxUFKU6a5oFXsEJnTPvb3QPb7GDDmSv5yZ1jFHDwR"
+			]
+		}
+	},
+	"version": 1
+}

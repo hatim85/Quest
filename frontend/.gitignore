@@ -1,0 +1,34 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
+
+
+hatimunwala@Hatims-MacBook-Air blockchain % npx hardhat run scripts/deploy.js --network luksoTestnet
+Deploying contracts with: 0x9e9a6a26645B1467C0285A033642aC5D423a46A0
+LSP8NFT deployed to: 0x4aE6cf86fcce9C565598E2b8f20B4204715f1C7d
+QuestManager deployed to: 0xbB37ceD4C4957afF5F8AeFf550e5E980378a5b6D
+QuestManager set as quest manager in LSP8NFT
+hatimunwala@Hatims-MacBook-Air blockchain % cd ..

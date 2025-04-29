@@ -1,0 +1,25 @@
+node_modules
+.env
+
+# Hardhat files
+/cache
+/artifacts
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+# Hardhat Ignition default folder for deployments against a local node
+ignition/deployments/chain-31337
+
+hatim@Hatims-MacBook-Air QuestBlockchain % npx hardhat run scripts/deploy.js --network luksoTestnet
+
+Deploying contracts with: 0x39987cA04006C3D9d895985E435a97489905EB75
+LSP8NFT deployed to: 0xEfA0258110f5445A801C0Cfb862884B95f7bC108
+QuestManager deployed to: 0x5d216C793BC4F4e98bd235a035282D3eF6A6bde6
+QuestManager set as quest manager in LSP8NFT
+hatim@Hatims-MacBook-Air QuestBlockchain % 
