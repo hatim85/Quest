@@ -6,21 +6,14 @@ async function main() {
 
   // Deploy ERC721NFT contract
   const ERC721NFT = await ethers.getContractFactory("ERC721NFT");
-  const erc721 = await ERC721NFT.deploy(
-    "GridQuest NFT", // name
-    "GQNFT"         // symbol
-  );
+  const erc721 = await ERC721NFT.deploy("GridQuest NFT", "GQNFT");
   await erc721.waitForDeployment();
   console.log("ERC721NFT deployed to:", erc721.target);
 
   // Deploy QuestManager contract
   const QuestManager = await ethers.getContractFactory("QuestManager");
-  const universalProfileAddress = "0xdD2FD4581271e230360230F9337D5c0430Bf44C0"; // Mock or real Universal Profile address
-  const questManager = await QuestManager.deploy(
-    erc721.target,                // ERC721NFT contract address
-    universalProfileAddress,      // Universal Profile address
-    30                           // count
-  );
+  const universalProfileAddress = "0xBba320Afb3690192d10eA9664c2CA9F85b40dc58"; // Replace with actual Universal Profile if needed
+  const questManager = await QuestManager.deploy(erc721.target, universalProfileAddress);
   await questManager.waitForDeployment();
   console.log("QuestManager deployed to:", questManager.target);
 
@@ -31,6 +24,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(error);
+  console.error("Deployment failed:", error);
   process.exitCode = 1;
 });

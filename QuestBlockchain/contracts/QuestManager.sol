@@ -45,7 +45,7 @@ contract QuestManager is ERC725Y {
     }
 
     constructor(address _rewardNFTContract, address _universalProfile) ERC725Y(_universalProfile){
-        admin = msg.sender;
+        admin = _universalProfile;
         rewardNFTContract = IERC721(_rewardNFTContract);
 
         // universalProfile = IERC725Y(_universalProfile);

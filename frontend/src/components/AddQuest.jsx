@@ -6,7 +6,6 @@ const AddQuest = ({ contract, signer }) => {
     questType: "",
     xpReward: "",
     givesNFT: false,
-    rewardTokenId: "",
   });
 
   const handleChange = (e) => {
@@ -22,10 +21,10 @@ const AddQuest = ({ contract, signer }) => {
         form.questType,
         parseInt(form.xpReward),
         form.givesNFT,
-        form.givesNFT ? form.rewardTokenId : "0x0"
       );
       await tx.wait();
       alert("Quest created successfully!");
+      setForm({ title: "", questType: "", xpReward: "", givesNFT: false });
     } catch (err) {
       console.error("Error creating quest:", err);
       alert("Failed to create quest");
@@ -45,15 +44,21 @@ const AddQuest = ({ contract, signer }) => {
           onChange={handleChange}
           required
         />
-        <input
+
+        <select
           className="w-full border p-2 rounded"
-          type="text"
           name="questType"
-          placeholder="Quest Type"
           value={form.questType}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="">Select Quest Type</option>
+          <option value="daily-login">Daily Login Reward</option>
+          <option value="file-upload">File Upload</option>
+          <option value="click-task">Click Task</option>
+          <option value="video-task">Video Task (YouTube)</option>
+        </select>
+
         <input
           className="w-full border p-2 rounded"
           type="number"
@@ -63,6 +68,7 @@ const AddQuest = ({ contract, signer }) => {
           onChange={handleChange}
           required
         />
+
         <label className="flex items-center space-x-2">
           <input
             type="checkbox"
@@ -72,17 +78,7 @@ const AddQuest = ({ contract, signer }) => {
           />
           <span>Reward NFT?</span>
         </label>
-        {form.givesNFT && (
-          <input
-            className="w-full border p-2 rounded"
-            type="text"
-            name="rewardTokenId"
-            placeholder="Reward Token ID (bytes32)"
-            value={form.rewardTokenId}
-            onChange={handleChange}
-            required
-          />
-        )}
+
         <button
           className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
           type="submit"

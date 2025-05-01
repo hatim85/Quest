@@ -27,6 +27,7 @@ const YouTubePlayer = ({ videoId, onVideoEnd }) => {
 
   return (
     <div className="aspect-w-16 aspect-h-9">
+    {console.log("Video ID:", videoId)}
       <iframe
         ref={iframeRef}
         id="player"
