@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import YouTubePlayer from "./YouTubePlayer"; // Adjust path if needed
-import { ClipLoader } from "react-spinners"; // Added for loading spinner
+import YouTubePlayer from "./YouTubePlayer";
+import { ClipLoader } from "react-spinners";
 
 function QuestDashboard({ contract, signer }) {
   const navigate = useNavigate();
   const [quests, setQuests] = useState([]);
-  const [profile, setProfile] = useState(null); // Store profile data
+  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isWalletConnected, setIsWalletConnected] = useState(false); // Track wallet connection
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
 
-  // Hardcoded videoId mapping (since not stored in contract)
   const videoIdMap = {
-    0: "BXuM5sfuYsc", // Example: Map quest ID 0 to a YouTube video ID
-    // Add more quest ID to videoId mappings as needed
+    0: "BXuM5sfuYsc",
   };
 
   useEffect(() => {
@@ -43,14 +41,11 @@ function QuestDashboard({ contract, signer }) {
     const fetchProfileAndQuests = async () => {
       try {
         const userAddress = await signer.getAddress();
-
-        // Fetch profile data
         const xp = await contract.getXP(userAddress);
         const level = await contract.getLevel(userAddress);
         const questCount = Number(await contract.questCount());
         const completedQuests = [];
 
-        // Fetch completed quests
         for (let i = 0; i < questCount; i++) {
           const hasCompleted = await contract.hasCompleted(userAddress, i);
           if (hasCompleted) {
@@ -58,15 +53,13 @@ function QuestDashboard({ contract, signer }) {
           }
         }
 
-        // Set profile data
         setProfile({
           xp: Number(xp),
           level: Number(level),
           completedQuests,
-          gridTheme: "default", // Placeholder, replace if stored elsewhere
+          gridTheme: "default",
         });
 
-        // Fetch quests
         const questList = [];
         for (let i = 0; i < questCount; i++) {
           const quest = await contract.quests(i);
@@ -79,7 +72,7 @@ function QuestDashboard({ contract, signer }) {
             isActive: quest.isActive,
             givesNFT: quest.givesNFT,
             hasCompleted,
-            videoId: videoIdMap[i] || null, // Assign videoId if available
+            videoId: videoIdMap[i] || null,
           });
         }
 
@@ -105,8 +98,6 @@ function QuestDashboard({ contract, signer }) {
       const tx = await contract.completeQuest(questId);
       await tx.wait();
       toast.success("Quest completed!");
-
-      // Update profile
       const userAddress = await signer.getAddress();
       const xp = await contract.getXP(userAddress);
       const level = await contract.getLevel(userAddress);
@@ -118,8 +109,6 @@ function QuestDashboard({ contract, signer }) {
       };
 
       setProfile(updatedProfile);
-
-      // Refresh quests
       const hasCompleted = await contract.hasCompleted(userAddress, questId);
       setQuests((prev) =>
         prev.map((q) => (q.id === questId ? { ...q, hasCompleted } : q))
@@ -130,99 +119,139 @@ function QuestDashboard({ contract, signer }) {
     }
   };
 
-  // Show wallet connection prompt if wallet is not connected
   if (!isWalletConnected) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p>Please connect your wallet.</p>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-200">
+        <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+          <p className="text-lg font-medium text-gray-700">
+            Please connect your wallet to view quests.
+          </p>
+        </div>
       </div>
     );
   }
 
-  // Show loader while fetching data
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <ClipLoader color="#3b82f6" size={50} />
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-200">
+        <ClipLoader color="#4f46e5" size={60} />
       </div>
     );
   }
 
-  // Main dashboard content
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Quest Dashboard</h1>
-      {profile && (
-        <p className="mb-4">
-          Level: {profile.level} | XP: {profile.xp}
-        </p>
-      )}
-      <button
-        onClick={() => navigate("/grid")}
-        className="mb-4 p-2 bg-blue-500 text-white rounded"
-      >
-        View Grid
-      </button>
-      <div className="grid gap-4">
-        {quests.length === 0 ? (
-          <p>No quests available.</p>
-        ) : (
-          quests
-            .filter((quest) => !quest.hasCompleted) // Filter out completed quests
-            .map((quest) => (
-              <div key={quest.id} className="p-4 bg-white rounded shadow">
-                <h2 className="text-xl font-semibold">{quest.title}</h2>
-                <p>Type: {quest.questType}</p>
-                <p>XP Reward: {quest.xpReward}</p>
-                <p>Status: {quest.isActive ? "Active" : "Inactive"}</p>
-                <p>NFT Reward: {quest.givesNFT ? "Yes" : "No"}</p>
-
-                {!quest.isActive ? (
-                  <p className="text-gray-500 mt-2">This quest is not currently active.</p>
-                ) : (
-                  <>
-                    {quest.questType === "video-task" && quest.videoId ? (
-                      <>
-                        {console.log("Quest Dashboard Video ID:", quest.videoId)}
-                        <YouTubePlayer
-                          videoId={quest.videoId}
-                          onVideoEnd={() => completeQuest(quest.id)}
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="bg-white shadow-lg rounded-xl p-6">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">
+          Quest Dashboard
+        </h1>
+        {profile && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-sm font-medium text-gray-600">Level</p>
+              <p className="text-lg font-semibold text-gray-900">
+                {profile.level}
+              </p>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-sm font-medium text-gray-600">XP</p>
+              <p className="text-lg font-semibold text-gray-900">{profile.xp}</p>
+            </div>
+          </div>
+        )}
+        <button
+          onClick={() => navigate("/grid")}
+          className="mb-6 px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
+        >
+          View Quest Grid
+        </button>
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {quests.length === 0 ? (
+            <p className="text-gray-600 col-span-full text-center">
+              No quests available.
+            </p>
+          ) : quests.filter((quest) => !quest.hasCompleted).length === 0 ? (
+            <p className="text-gray-600 col-span-full text-center">
+              No active or incomplete quests available.
+            </p>
+          ) : (
+            quests
+              .filter((quest) => !quest.hasCompleted)
+              .map((quest) => (
+                <div
+                  key={quest.id}
+                  className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200"
+                >
+                  <h2 className="text-xl font-semibold text-gray-900 mb-3">
+                    {quest.title}
+                  </h2>
+                  <div className="space-y-2 text-sm text-gray-600">
+                    <p>
+                      <span className="font-medium">Type:</span>{" "}
+                      {quest.questType.replace("-", " ").toUpperCase()}
+                    </p>
+                    <p>
+                      <span className="font-medium">XP Reward:</span>{" "}
+                      {quest.xpReward}
+                    </p>
+                    <p>
+                      <span className="font-medium">Status:</span>{" "}
+                      {quest.isActive ? "Active" : "Inactive"}
+                    </p>
+                    <p>
+                      <span className="font-medium">NFT Reward:</span>{" "}
+                      {quest.givesNFT ? "Yes" : "No"}
+                    </p>
+                  </div>
+                  {!quest.isActive ? (
+                    <p className="text-gray-500 mt-4 text-sm">
+                      This quest is not currently active.
+                    </p>
+                  ) : (
+                    <div className="mt-4">
+                      {quest.questType === "video-task" && quest.videoId ? (
+                        <>
+                          {console.log("Quest Dashboard Video ID:", quest.videoId)}
+                          <YouTubePlayer
+                            videoId={quest.videoId}
+                            onVideoEnd={() => completeQuest(quest.id)}
+                          />
+                        </>
+                      ) : quest.questType === "daily-login" ? (
+                        <button
+                          onClick={() => completeQuest(quest.id)}
+                          className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
+                        >
+                          Claim Daily Login Reward
+                        </button>
+                      ) : quest.questType === "file-upload" ? (
+                        <input
+                          type="file"
+                          accept="*"
+                          onChange={(e) => {
+                            if (e.target.files.length > 0)
+                              completeQuest(quest.id);
+                          }}
+                          className="mt-2 w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-600 file:text-white file:hover:bg-indigo-700 file:transition-colors"
                         />
-                      </>
-                    ) : quest.questType === "daily-login" ? (
-                      <button
-                        onClick={() => completeQuest(quest.id)}
-                        className="mt-2 p-2 bg-blue-500 text-white rounded"
-                      >
-                        Claim Daily Login Reward
-                      </button>
-                    ) : quest.questType === "file-upload" ? (
-                      <input
-                        type="file"
-                        accept="*"
-                        onChange={(e) => {
-                          if (e.target.files.length > 0) completeQuest(quest.id);
-                        }}
-                        className="mt-2"
-                      />
-                    ) : quest.questType === "click-task" ? (
-                      <button
-                        onClick={() => completeQuest(quest.id)}
-                        className="mt-2 p-2 bg-yellow-500 text-white rounded"
-                      >
-                        Click to Complete
-                      </button>
-                    ) : (
-                      <p className="text-red-500">Unknown or misconfigured quest type.</p>
-                    )}
-                  </>
-                )}
-              </div>
-            ))
-        )}
-        {quests.filter((quest) => !quest.hasCompleted).length === 0 && (
-          <p>No active or incomplete quests available.</p>
-        )}
+                      ) : quest.questType === "click-task" ? (
+                        <button
+                          onClick={() => completeQuest(quest.id)}
+                          className="w-full px-4 py-2 bg-yellow-500 text-white rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition-colors duration-200"
+                        >
+                          Click to Complete
+                        </button>
+                      ) : (
+                        <p className="text-red-500 text-sm">
+                          Unknown or misconfigured quest type.
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))
+          )}
+        </div>
       </div>
     </div>
   );

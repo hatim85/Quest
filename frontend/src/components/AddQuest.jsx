@@ -32,55 +32,91 @@ const AddQuest = ({ contract, signer }) => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-4 text-center">Create New Quest</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          className="w-full border p-2 rounded"
-          type="text"
-          name="title"
-          placeholder="Quest Title"
-          value={form.title}
-          onChange={handleChange}
-          required
-        />
-
-        <select
-          className="w-full border p-2 rounded"
-          name="questType"
-          value={form.questType}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select Quest Type</option>
-          <option value="daily-login">Daily Login Reward</option>
-          <option value="file-upload">File Upload</option>
-          <option value="click-task">Click Task</option>
-          <option value="video-task">Video Task (YouTube)</option>
-        </select>
-
-        <input
-          className="w-full border p-2 rounded"
-          type="number"
-          name="xpReward"
-          placeholder="XP Reward"
-          value={form.xpReward}
-          onChange={handleChange}
-          required
-        />
-
-        <label className="flex items-center space-x-2">
+    <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-8">
+      <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+        Create New Quest
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Quest Title
+          </label>
           <input
+            id="title"
+            className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+            type="text"
+            name="title"
+            placeholder="Enter quest title"
+            value={form.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="questType"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Quest Type
+          </label>
+          <select
+            id="questType"
+            className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white"
+            name="questType"
+            value={form.questType}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Quest Type</option>
+            <option value="daily-login">Daily Login Reward</option>
+            <option value="file-upload">File Upload</option>
+            <option value="click-task">Click Task</option>
+            <option value="video-task">Video Task (YouTube)</option>
+          </select>
+        </div>
+
+        <div>
+          <label
+            htmlFor="xpReward"
+            className="block text-sm font-medium text-gray-700"
+          >
+            XP Reward
+          </label>
+          <input
+            id="xpReward"
+            className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+            type="number"
+            name="xpReward"
+            placeholder="Enter XP reward"
+            value={form.xpReward}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="flex items-center">
+          <input
+            id="givesNFT"
             type="checkbox"
             name="givesNFT"
             checked={form.givesNFT}
             onChange={handleChange}
+            className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
           />
-          <span>Reward NFT?</span>
-        </label>
+          <label
+            htmlFor="givesNFT"
+            className="ml-2 block text-sm font-medium text-gray-700"
+          >
+            Reward NFT?
+          </label>
+        </div>
 
         <button
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="w-full bg-indigo-600 text-white py-3 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
           type="submit"
         >
           Create Quest
