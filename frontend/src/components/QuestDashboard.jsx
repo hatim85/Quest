@@ -12,7 +12,7 @@ function QuestDashboard({ contract, signer }) {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
 
   const videoIdMap = {
-    0: "BXuM5sfuYsc",
+    0: "BXuM5sfuYsc"
   };
 
   useEffect(() => {
@@ -72,7 +72,7 @@ function QuestDashboard({ contract, signer }) {
             isActive: quest.isActive,
             givesNFT: quest.givesNFT,
             hasCompleted,
-            videoId: videoIdMap[i] || null,
+            videoId: "BB49x_uMlGA", // Fixed video for all video quests
           });
         }
 
@@ -179,9 +179,10 @@ function QuestDashboard({ contract, signer }) {
               .filter((quest) => !quest.hasCompleted)
               .map((quest) => (
                 <div
-                  key={quest.id}
-                  className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200"
+                key={quest.id}
+                className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200"
                 >
+                  {console.log("Quest Dashboard Quest:", quest)}
                   <h2 className="text-xl font-semibold text-gray-900 mb-3">
                     {quest.title}
                   </h2>
