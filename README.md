@@ -1,98 +1,95 @@
 
 ---
 
-# 🚀 Quest
+````markdown
+# Web3 Quest-Based Application
 
-Welcome to the **Quest** project! This repository contains a decentralized application (dApp) built using **MERN stack**, **Solidity**, and **Tailwind CSS**.
+A full-stack gamified Web3 application that allows users to complete quests, earn XP, level up, and optionally receive NFT rewards. This project is built on top of the LUKSO ecosystem and integrates Universal Profiles using the ERC725Y standard.
 
----
+## 🚀 Features
 
-## 🧭 Overview
+- Web3 quest system with XP rewards  
+- Player level progression  
+- Optional NFT minting upon quest completion  
+- Seamless integration with Universal Profiles  
+- Real-time metadata updates via ERC725Y  
+- Fully decentralized smart contract backend  
 
-**Quest** is a feature-rich, user-friendly decentralized application that leverages **blockchain technology**. It integrates **smart contracts** with a polished frontend interface to deliver secure, efficient, and decentralized solutions.
+## ⚙️ Tech Stack
 
----
+**Frontend**
+- React.js  
+- Ethers.js  
+- TailwindCSS  
+- Universal Profile SDK (LUKSO)  
 
-## ✨ Features
+**Backend / Smart Contract**
+- Solidity (`^0.8.28`)  
+- ERC725Y (LUKSO standard)  
+- Hardhat (deployment & testing)  
 
-* 🔐 **Smart Contracts**: Secure and decentralized logic built using **Solidity**.
-* 💻 **Interactive Frontend**: Responsive interface crafted with **JavaScript**, **HTML**, and **Tailwind CSS**.
-* 🔗 **Blockchain Integration**: Smooth interaction with Ethereum-compatible networks for a seamless dApp experience.
+## 📦 Getting Started
 
----
+### 1. Clone the Repository
 
-## 🛠️ Tech Stack
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+````
 
-| Layer          | Technology                                 |
-| -------------- | ------------------------------------------ |
-| 🧠 Logic       | **Solidity**                               |
-| 🌐 Frontend    | **JavaScript**, **HTML**, **Tailwind CSS** |
-| 🔌 Integration | **Ethers.js**, **Hardhat**                 |
+### 2. Install Dependencies
 
----
+```bash
+npm install
+```
 
-## 📦 Installation
+### 3. Configure Environment
 
-Follow these steps to run Quest locally:
+Create a `.env` file in the root directory and add:
 
-1. **Clone the repository**
+```ini
+PRIVATE_KEY=your_wallet_private_key
+RPC_URL=https://rpc-endpoint
+NFT_CONTRACT_ADDRESS=your_deployed_nft_contract
+UP_ADDRESS=your_universal_profile_address
+```
 
-   ```bash
-   git clone https://github.com/hatim85/Quest.git
-   cd Quest
-   ```
+### 4. Compile and Deploy Contracts
 
-2. **Install dependencies**
+```bash
+npx hardhat compile
+npx hardhat run scripts/deploy.js --network yourNetwork
+```
 
-   ```bash
-   npm install
-   ```
+Update `scripts/deploy.js` with your NFT and Universal Profile addresses.
 
-3. **Compile the smart contracts**
+### 5. Run the Frontend
 
-   ```bash
-   npx hardhat compile
-   ```
+```bash
+npm run dev
+```
 
-4. **Deploy the smart contracts**
+## 🧪 Testing
 
-   ```bash
-   npx hardhat run scripts/deploy.js --network luksoTestnet
-   ```
+Run unit tests using Hardhat:
 
-5. **Start the development server**
+```bash
+npx hardhat test
+```
 
-   ```bash
-   npm start
-   ```
+## 📝 License
 
-6. **Open the app**
-   Visit 👉 `https://gridquest.vercel.app`
+This project is open-sourced under the MIT License.
 
----
+## 🙌 Contributions
 
-## 🤝 Contributing
-
-Contributions are welcome! Here’s how you can help:
-
-1. 🍴 Fork the repository
-2. 🌱 Create a new branch (`git checkout -b feature/your-feature-name`)
-3. 💾 Commit your changes (`git commit -m 'Add your feature'`)
-4. 🚀 Push to your branch (`git push origin feature/your-feature-name`)
-5. 📬 Open a pull request
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
-See the [LICENSE](LICENSE) file for more details.
+Feel free to fork, contribute, and submit PRs. Contributions are welcome and appreciated!
 
 ---
 
-## 📬 Contact
+Built with 💜 using LUKSO tools and the ERC725Y standard.
 
-Have questions, suggestions, or feedback?
-Feel free to [open an issue](https://github.com/hatim85/Quest/issues) or reach out!
+```
 
 ---
+
