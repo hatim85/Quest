@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { ethers } from 'ethers';
@@ -56,7 +56,7 @@ function App() {
       if (address.toLowerCase() === ADMIN_ADDRESS.toLowerCase()) {
         navigate('/add-quest');
       } else {
-        navigate('/dashboard');
+        // navigate('/dashboard');
       }
     } catch (error) {
       console.error('Failed to connect wallet:', error);
@@ -187,10 +187,13 @@ function App() {
       />
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-indigo-600">QuestVerse</h1>
+          <h1 className="text-2xl font-bold text-indigo-600">
+            <Link to="/">GridQuest</Link>
+          </h1>
           <button
             onClick={connectWallet}
             className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-200 flex items-center gap-2"
+            aria-label="Connect Wallet"
           >
             <svg
               className="w-5 h-5"
@@ -233,6 +236,7 @@ function App() {
                 signer={signer}
                 setProfile={setProfile}
                 walletAddress={walletAddress}
+                connectWallet={connectWallet}
               />
             }
           />
