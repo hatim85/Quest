@@ -3,7 +3,7 @@
 
 # 🚀 Quest
 
-Welcome to the **Quest** project! This repository contains a decentralized application (dApp) built using **JavaScript**, **Solidity**, **Tailwind CSS**, and **HTML**.
+Welcome to the **Quest** project! This repository contains a decentralized application (dApp) built using **MERN stack**, **Solidity**, and **Tailwind CSS**.
 
 ---
 
