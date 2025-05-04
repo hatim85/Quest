@@ -62,7 +62,7 @@ function Onboarding({ walletAddress, signer, contract, setProfile, connectWallet
     {
       icon: <Compass className="w-8 h-8 text-indigo-500" />,
       title: "Explore Quests",
-      description: "Discover exciting challenges and adventures in the QuestVerse world"
+      description: "Discover exciting challenges and adventures in the GridQuest world"
     },
     {
       icon: <Shield className="w-8 h-8 text-indigo-500" />,
@@ -97,7 +97,7 @@ function Onboarding({ walletAddress, signer, contract, setProfile, connectWallet
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         <div className="text-center mb-16">
           <h1 className="text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-6">
-            Welcome to QuestVerse
+            Welcome to GridQuest
           </h1>
           <p className="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto mb-8">
             Embark on an epic journey through the blockchain realm. Complete quests, earn rewards, and become a legendary hero.
@@ -133,7 +133,7 @@ function Onboarding({ walletAddress, signer, contract, setProfile, connectWallet
               Ready to Start Your Adventure?
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Connect your wallet to join thousands of heroes in the QuestVerse. Glory awaits!
+              Connect your wallet to join thousands of heroes in the GridQuest. Glory awaits!
             </p>
             <div className="flex justify-center space-x-4">
               <div className="flex items-center text-gray-600">
